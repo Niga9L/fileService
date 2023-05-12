@@ -29,6 +29,12 @@
       ],
       "@lib/entities/*": [
         "libs/entities/src/*"
+      ],
+      "@libs/file": [
+        "libs/file/src"
+      ],
+      "@libs/file/*": [
+        "libs/file/src/*"
       ]
     }
   }

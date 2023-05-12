@@ -31,6 +31,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/cqrs": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
     "husky": "^8.0.3",
@@ -86,7 +87,8 @@
     ],
     "moduleNameMapper": {
       "^@lib/providers(|/.*)$": "<rootDir>/libs/providers/src/$1",
-      "^@lib/entities(|/.*)$": "<rootDir>/libs/entities/src/$1"
+      "^@lib/entities(|/.*)$": "<rootDir>/libs/entities/src/$1",
+      "^@libs/file(|/.*)$": "<rootDir>/libs/file/src/$1"
     }
   },
   "husky": {

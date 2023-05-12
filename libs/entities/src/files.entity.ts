@@ -9,16 +9,13 @@ export class FilesEntity {
   name: string;
 
   @Column()
-  title: string;
-
-  @Column()
   link: string;
 
   @Column({ name: 'user_id' })
   userId: string;
 
   @Column({ name: 'is_published' })
-  isPublished: string;
+  isPublished: boolean;
 
   @Column({ name: 'created_at' })
   createdAt: string;
