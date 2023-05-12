@@ -17,13 +17,19 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prettier-watch": "onchange '{src,apps,libs,test}/**/*' -- prettier --write {{changed}}",
+    "prepare": "husky install && npm run clean",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "husky": "^8.0.3",
+    "onchange": "^7.1.0",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^5.0.0",
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
@@ -65,5 +71,16 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src,apps,libs,test}/**/*.{ts}": [
+      "prettier --write",
+      "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    ]
   }
 }
