@@ -34,6 +34,8 @@
     "@nestjs/cqrs": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "husky": "^8.0.3",
     "onchange": "^7.1.0",
     "pg": "^8.10.0",

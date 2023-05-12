@@ -1,4 +1,4 @@
-export interface IFiles {
+export interface IFile {
   id: string;
 
   name: string;
