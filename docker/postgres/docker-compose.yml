@@ -30,6 +30,7 @@ services:
       - "${PGADMIN_PORT:-5050}:80"
     networks:
       - postgres_template
+    platform: linux/amd64
     restart: unless-stopped
 
 networks:
@@ -38,4 +39,5 @@ networks:
 
 volumes:
   postgres_template:
+    driver: locale
   pgadmin_template:
