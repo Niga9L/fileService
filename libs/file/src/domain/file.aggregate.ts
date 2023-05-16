@@ -25,6 +25,9 @@ export class FileAggregate extends FileServices implements IFile {
   @IsString()
   updatedAt = new Date().toISOString();
 
+  @IsString()
+  deletedAt: string;
+
   private constructor() {
     super();
   }
@@ -33,6 +36,18 @@ export class FileAggregate extends FileServices implements IFile {
     const _file = new FileAggregate();
     Object.assign(_file, file);
     _file.updatedAt = file?.id ? new Date().toISOString() : _file.updatedAt;
+    const errors = validateSync(_file, { whitelist: true });
+    if (!!errors.length) {
+      throw new DomainError(errors, 'File not valid');
+    }
+    return _file;
+  }
+
+  static delete(file: Partial<IFile>) {
+    const _file = new FileAggregate();
+    Object.assign(_file, file);
+    _file.updatedAt = file?.id ? new Date().toISOString() : _file.updatedAt;
+    _file.deletedAt = file?.id && new Date().toISOString();
     const errors = validateSync(_file, { whitelist: true });
     if (!!errors.length) {
       throw new DomainError(errors, 'File not valid');
