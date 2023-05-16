@@ -7,8 +7,6 @@ export interface IFile {
 
   userId: string;
 
-  published: boolean;
-
   createdAt: string;
 
   updatedAt: string;

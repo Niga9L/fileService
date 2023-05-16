@@ -14,9 +14,6 @@ export class FilesEntity {
   @Column({ name: 'user_id' })
   userId: string;
 
-  @Column({ name: 'is_published' })
-  isPublished: boolean;
-
   @Column({ name: 'created_at' })
   createdAt: string;
 
