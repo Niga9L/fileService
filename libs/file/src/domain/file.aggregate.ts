@@ -9,6 +9,7 @@ import {
   validateSync,
 } from 'class-validator';
 import { Exclude } from 'class-transformer';
+import { DomainError } from '@lib/errors';
 
 export class FileAggregate extends FileServices implements IFile {
   @IsUUID()
@@ -45,8 +46,8 @@ export class FileAggregate extends FileServices implements IFile {
     Object.assign(_file, file);
     _file.updatedAt = file?.id ? new Date().toISOString() : _file.updatedAt;
     const errors = validateSync(_file, { whitelist: true });
-    if (errors.length) {
-      throw new Error('Post not valid');
+    if (!!errors.length) {
+      throw new DomainError(errors, 'File not valid');
     }
     return _file;
   }

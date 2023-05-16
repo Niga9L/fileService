@@ -35,6 +35,12 @@
       ],
       "@libs/file/*": [
         "libs/file/src/*"
+      ],
+      "@lib/errors": [
+        "libs/errors/src"
+      ],
+      "@lib/errors/*": [
+        "libs/errors/src/*"
       ]
     }
   }
