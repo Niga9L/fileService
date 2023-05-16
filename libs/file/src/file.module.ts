@@ -1,4 +1,30 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
+import { CommandBus, CqrsModule, EventBus, QueryBus } from '@nestjs/cqrs';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { FilesEntity } from '@lib/entities';
+import { FILE_QUERIES_HANDLERS } from '@libs/file/application-services/queries';
+import { FILE_EVENTS_HANDLERS } from '@libs/file/application-services/events';
+import { FILE_COMMANDS_HANDLERS } from '@libs/file/application-services/commands';
+import { FileFacade } from '@libs/file/application-services';
 
-@Module({})
-export class FileModule {}
+@Module({
+  imports: [CqrsModule, TypeOrmModule.forFeature([FilesEntity])],
+  providers: [
+    ...FILE_QUERIES_HANDLERS,
+    ...FILE_EVENTS_HANDLERS,
+    ...FILE_COMMANDS_HANDLERS,
+  ],
+  exports: [FileFacade],
+})
+export class FileModule implements OnModuleInit {
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+    private readonly eventBus: EventBus,
+  ) {}
+  onModuleInit() {
+    this.commandBus.register(FILE_COMMANDS_HANDLERS);
+    this.queryBus.register(FILE_QUERIES_HANDLERS);
+    this.eventBus.register(FILE_EVENTS_HANDLERS);
+  }
+}
