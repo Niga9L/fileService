@@ -91,7 +91,8 @@
       "^@lib/providers(|/.*)$": "<rootDir>/libs/providers/src/$1",
       "^@lib/entities(|/.*)$": "<rootDir>/libs/entities/src/$1",
       "^@libs/file(|/.*)$": "<rootDir>/libs/file/src/$1",
-      "^@lib/errors(|/.*)$": "<rootDir>/libs/errors/src/$1"
+      "^@lib/errors(|/.*)$": "<rootDir>/libs/errors/src/$1",
+      "^@lib/shared(|/.*)$": "<rootDir>/libs/shared/src/$1"
     }
   },
   "husky": {
