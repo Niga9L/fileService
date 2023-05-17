@@ -1,28 +1,25 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
 import { config } from 'dotenv';
 import { join } from 'path';
-import * as process from 'process';
-import { ConfigService } from '@nestjs/config';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 config({ path: join(process.cwd(), '.env') });
-const configService = new ConfigService();
 
 const options = (): DataSourceOptions => {
-  const url = configService.get('DATABASE_URL');
+  const url = process.env.DATABASE_URL;
   if (!url) {
-    throw new Error('Database URL is empty');
+    throw new Error('DATABASE_URL not setted');
   }
   return {
-    url,
     type: 'postgres',
+    url,
     schema: 'public',
-    logging: configService.get('IS_PROD') === 'false',
     entities: [
-      join(process.cwd(), 'dist', 'libs', 'entities', '**', '*.entity.{ts,js}'),
+      join(process.cwd(), 'dist', 'libs', 'entities', '**', '*.entity.js'),
     ],
     migrations: [join(process.cwd(), 'dist', 'migrations', '*migration.js')],
     migrationsTableName: process.env.MIGRATIONS_TABLE_NAME || 'migrations',
     migrationsRun: true,
   };
 };
+
 export const appDataSource = new DataSource(options());
