@@ -6,6 +6,7 @@ import { FILE_QUERIES_HANDLERS } from '@libs/file/application-services/queries';
 import { FILE_EVENTS_HANDLERS } from '@libs/file/application-services/events';
 import { FILE_COMMANDS_HANDLERS } from '@libs/file/application-services/commands';
 import { FileFacade } from '@libs/file/application-services';
+import { fileFacadeFactory } from '@libs/file/providers';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([FilesEntity])],
@@ -13,6 +14,11 @@ import { FileFacade } from '@libs/file/application-services';
     ...FILE_QUERIES_HANDLERS,
     ...FILE_EVENTS_HANDLERS,
     ...FILE_COMMANDS_HANDLERS,
+    {
+      provide: FileFacade,
+      inject: [CommandBus, QueryBus, EventBus],
+      useFactory: fileFacadeFactory,
+    },
   ],
   exports: [FileFacade],
 })

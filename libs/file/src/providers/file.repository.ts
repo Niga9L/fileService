@@ -7,5 +7,5 @@ export abstract class FileRepository {
   abstract findAll(
     pagination: PaginationDto,
   ): Promise<[[FileAggregate], number]>;
-  abstract delete(id: string): Promise<boolean>;
+  // abstract delete(id: string): Promise<boolean>;
 }
